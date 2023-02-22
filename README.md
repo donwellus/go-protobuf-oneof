@@ -5,6 +5,17 @@ For that we use a proto message with a `repeated` field of another proto message
 
 It was used [Buf](https://github.com/bufbuild/buf) CLI to generate Go Code from Protobuf, Buf also has a linter and formatter that was used in Protobuf files.
 
+## Diagram
+
+```mermaid
+flowchart TB;
+    Collection[Collection struct]-- has a list of pointers to -->Item[Item struct];
+    Item-- contains -->isItem_Item[isItem_Item interface];
+    Item_ShowcaseItem[Item_ShowcaseItem struct] & Item_ProductItem[Item_ProductItem struct] -- implements -->isItem_Item;
+    Item_ProductItem-- has a pointer to -->Item_Product[Item_Product struct]
+    Item_ShowcaseItem-- has a pointer to -->Item_Showcase[Item_Showcase struct]
+```
+
 ## Proto
 
 ```proto
