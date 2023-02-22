@@ -10,7 +10,7 @@ import (
 func main() {
 	product := &itemv2.Item_ProductItem{
 		ProductItem: &itemv2.Item_Product{
-			Sku: string("HT-1234"),
+			Sku: "ht-1234",
 		},
 	};
 	showcase := &itemv2.Item_ShowcaseItem{
