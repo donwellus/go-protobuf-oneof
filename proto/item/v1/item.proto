@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package item.v1;
+
 option go_package = "github.com/donwellus/go-protobuf-oneof/proto";
 
 message ProductItem {
