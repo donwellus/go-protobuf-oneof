@@ -27,16 +27,6 @@ func main() {
 		},
 	}
 
-	// collection := &itemv1.Message{
-	// 	Item: &itemv1.Message_ShowcaseItem{
-	// 		ShowcaseItem: &itemv1.ShowcaseItem{
-	// 			Pos: "br",
-	// 			Category: "home",
-	// 			Slug: "hotels",
-	// 		},
-	// 	},
-	// }
-
 	data, err := proto.Marshal(collection)
 	if err != nil {
 		panic(err)
@@ -58,6 +48,4 @@ func main() {
 			fmt.Println(i, item.ShowcaseItem)
 		}
 	}
-	// fmt.Println(newMessage.GetProductItem())
-	// fmt.Println(newMessage.GetShowcaseItem())
 }
