@@ -3,20 +3,31 @@ package main
 import (
 	fmt "fmt"
 
-	itemv1 "github.com/donwellus/go-protobuf-oneof/gen/item/v1"
+	itemv2 "github.com/donwellus/go-protobuf-oneof/gen/item/v2"
 	"google.golang.org/protobuf/proto"
 )
 
 func main() {
-	message := &itemv1.Message{
-		Item: &itemv1.Message_ProductItem{
-			ProductItem: &itemv1.ProductItem{
-				Sku: string("HT-1234"),
-			},
+	product := &itemv2.Item_ProductItem{
+		ProductItem: &itemv2.Item_Product{
+			Sku: string("HT-1234"),
+		},
+	};
+	showcase := &itemv2.Item_ShowcaseItem{
+		ShowcaseItem: &itemv2.Item_Showcase{
+			Pos: "br",
+			Category: "home",
+			Slug: "home",
+		},
+	};
+	collection := &itemv2.Collection{
+		Items: []*itemv2.Item{
+			{Item: product},
+			{Item: showcase},
 		},
 	}
 
-	// message := &itemv1.Message{
+	// collection := &itemv1.Message{
 	// 	Item: &itemv1.Message_ShowcaseItem{
 	// 		ShowcaseItem: &itemv1.ShowcaseItem{
 	// 			Pos: "br",
@@ -26,24 +37,26 @@ func main() {
 	// 	},
 	// }
 
-	data, err := proto.Marshal(message)
+	data, err := proto.Marshal(collection)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println(data)
 
-	newMessage := &itemv1.Message{}
-	err = proto.Unmarshal(data, newMessage)
+	newCollection := &itemv2.Collection{}
+	err = proto.Unmarshal(data, newCollection)
 	if err != nil {
 		panic(err)
 	}
 
-	switch item := message.Item.(type) {
-	case *itemv1.Message_ProductItem:
-		fmt.Println(item.ProductItem)
-	case *itemv1.Message_ShowcaseItem:
-		fmt.Println(item.ShowcaseItem)
+	for i, it := range newCollection.Items {
+		switch item := it.GetItem().(type) {
+		case *itemv2.Item_ProductItem:
+			fmt.Println(i, item.ProductItem)
+		case *itemv2.Item_ShowcaseItem:
+			fmt.Println(i, item.ShowcaseItem)
+		}
 	}
 	// fmt.Println(newMessage.GetProductItem())
 	// fmt.Println(newMessage.GetShowcaseItem())
