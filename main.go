@@ -40,12 +40,17 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Println(newCollection)
+	fmt.Printf("%T\n", newCollection)
+	fmt.Printf("%+v\n", newCollection)
+
 	for i, it := range newCollection.Items {
+		fmt.Printf("RAW\tIndex: %d\tType: %T\t\tValue: {%v}\n", i, it, it)
 		switch item := it.GetItem().(type) {
 		case *itemv2.Item_ProductItem:
-			fmt.Println(i, item.ProductItem)
+			fmt.Printf("TYPED\tIndex: %d\tType: %T\tValue: {%v}\n", i, item.ProductItem, item.ProductItem)
 		case *itemv2.Item_ShowcaseItem:
-			fmt.Println(i, item.ShowcaseItem)
+			fmt.Printf("TYPED\tIndex: %d\tType: %T\tValue: {%v}\n", i, item.ShowcaseItem, item.ShowcaseItem)
 		}
 	}
 }
