@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package item.v1;
+option go_package = "github.com/donwellus/go-protobuf-oneof/proto";
+
+message ProductItem {
+  string sku = 1;
+}
+
+message ShowcaseItem {
+  string pos = 1;
+  string category = 2;
+  string slug = 3;
+}
+
+message Message {
+  oneof item {
+    ProductItem product_item = 1;
+    ShowcaseItem showcase_item = 2;
+  }
+}
