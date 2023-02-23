@@ -1,6 +1,6 @@
 # A Simple PoC using Go Protobuf Repeated and OneOf
 
-This PoC illustrates the use of a repeated field where its value can have different data structures.
+This Protobuf PoC illustrates the use of a repeated field where its value can have different data structures.
 For that we use a proto message with a `repeated` field of another proto message that use a field with an `oneof`.
 
 It was used [Buf](https://github.com/bufbuild/buf) CLI to generate Go Code from Protobuf, Buf also has a linter and formatter that was used in Protobuf files.
